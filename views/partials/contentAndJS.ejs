@@ -1,6 +1,6 @@
 <body>
     <div id="content">
-    <h1><%=heading%></h1>
+    <h1><%=heading%></h1> 
     <p><%=text%></p>
 
     <form class="input-group mb-3">
@@ -15,9 +15,8 @@
 
     <script>  
 
-
-        function getWeather(){
-            var input = document.getElementById("searchWord").value;
+        function getWeather(){ // making the api call
+            var input = document.getElementById("searchWord").value; // get value from input field
             var url = "https://api.openweathermap.org/data/2.5/weather?q=" + input + "&units=metric&mode=JSON&APPID=2ca35529bf5175f662f7db6aa421d8ca";
             var xmlhttp = new XMLHttpRequest();
             xmlhttp.open("GET", url, true);
@@ -30,22 +29,18 @@
                         console.log(jsonObj.name);
                         console.log(jsonObj.main.temp);
                         
-                        var city = jsonObj.name;
-                        var celcius = Math.round(jsonObj.main.temp);
-                        var imgSrc = "https://openweathermap.org/img/wn/" + jsonObj.weather[0].icon +"@2x.png";
-
-                        
+                        var city = jsonObj.name;    //cityname
+                        var celcius = Math.round(jsonObj.main.temp); //rounded temperature value
+                        var imgSrc = "https://openweathermap.org/img/wn/" + jsonObj.weather[0].icon +"@2x.png"; //weather icon image                        
 
                         console.log(imgSrc);
 
-
-
                         var result = "<p id='asd'>Weather in " + city + " right now:</p><br><p>" + celcius +"°C<img src='" +imgSrc + "'></p>";
 
-                        document.getElementById("results").innerHTML = result;
+                        document.getElementById("results").innerHTML = result; //adding the result to the page
 
                         }
-                    else{
+                    else{ // error message in case of incorrect input
                         var errorMessage ="<p id='asd'>No results found, try a different city name!</p>"
                         document.getElementById("results").innerHTML = errorMessage;
                     }
